@@ -1,4 +1,10 @@
-import { ArrowRight, HousePlus, Microscope, ShieldCheck, TimerReset } from "lucide-react";
+import {
+  ArrowRight,
+  HousePlus,
+  Microscope,
+  ShieldCheck,
+  TimerReset,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchMedTests } from "../api/medTestApi";
@@ -9,12 +15,14 @@ import TestList from "../components/tests/TestList";
 const highlights = [
   {
     title: "Professional Pathology Standards",
-    description: "A polished diagnostic experience with clear instructions and dependable care.",
+    description:
+      "A polished diagnostic experience with clear instructions and dependable care.",
     icon: ShieldCheck,
   },
   {
     title: "Flexible Collection Options",
-    description: "Book a lab visit or choose home sample collection based on your schedule.",
+    description:
+      "Book a lab visit or choose home sample collection based on your schedule.",
     icon: HousePlus,
   },
   {
@@ -34,7 +42,7 @@ export default function HomePage() {
     async function loadFeaturedTests() {
       try {
         const data = await fetchMedTests();
-        if (!ignore) {
+        if (!ignore && Array.isArray(data)) {
           setFeaturedTests(data.slice(0, 3));
         }
       } catch (error) {
